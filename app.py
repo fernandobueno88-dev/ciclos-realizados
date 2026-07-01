@@ -8,7 +8,6 @@ st.set_page_config(
 )
 
 st.title("🚛 Biomata Analytics")
-st.subheader("Controle Operacional de Ciclos")
 
 try:
     macros = carregar_macros()
@@ -16,19 +15,16 @@ try:
 
     col1, col2 = st.columns(2)
 
-    with col1:
-        st.metric("Registros de Macros", len(macros))
-
-    with col2:
-        st.metric("Viagens", len(viagens))
+    col1.metric("Macros", len(macros))
+    col2.metric("Viagens", len(viagens))
 
     st.divider()
 
-    st.write("### Controle de Produção")
-    st.dataframe(viagens.head())
+    st.subheader("Controle de Produção")
+    st.dataframe(viagens)
 
-    st.write("### Macros")
-    st.dataframe(macros.head())
+    st.subheader("Macros")
+    st.dataframe(macros)
 
-except Exception as e:
-    st.error(f"Erro ao carregar as planilhas: {e}")
+except Exception as erro:
+    st.error(erro)
